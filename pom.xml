@@ -39,7 +39,7 @@
 		<dependency>
 			<groupId>com.geetask</groupId>
 			<artifactId>chunked-uploader</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.2</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.slf4j</groupId>
