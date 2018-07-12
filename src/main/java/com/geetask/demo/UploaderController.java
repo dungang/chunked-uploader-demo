@@ -35,4 +35,5 @@ public class UploaderController {
 	public String handle(@RequestParam("file") MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		return storage.upload(file.getInputStream(),"test",request, response);
 	}
+	
 }
