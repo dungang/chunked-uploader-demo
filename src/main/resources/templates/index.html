@@ -30,10 +30,29 @@
 	<script type="text/javascript" src="/jquery.min.js"></script>
 	<script type="text/javascript" src="/webuploader.js"></script>
 	<script type="text/javascript" th:inline="javascript">
-		var uuid = /*[[${uuid}]]*/'111';
 		(function( $ ){
 		    // 当domReady的时候开始初始化
 		    $(function() {
+		    	
+		    	WebUploader.Uploader.register({'before-send-file':'initUpload'},{
+		    		initUpload:function(file) {
+		    			var deferred = $.ajax({
+		    				method:'post',
+		    				url:'/init',
+		    				dataType:'json',
+		    				data: {
+		    					name: file.name,
+		    					type: file.type,
+		    					timestamp: Math.round(new Date().getTime()/1000)
+		    				}
+		    			}).then(function(res){
+		    				console.log(res);
+		    				file.uploadId = res.uploadId
+		    				file.key = res.key
+		    			});
+		    			return deferred.promise();
+		    		}
+		    	});
 		        var $wrap = $('#uploader'),
 
 		            // 图片容器
@@ -176,9 +195,6 @@
 		                id: '#filePicker',
 		                label: '点击选择图片'
 		            },
-		            formData: {
-		                uuid: uuid
-		            },
 		            dnd: '#dndArea',
 		            paste: '#uploader',
 		            swf: '/Uploader.swf',
@@ -201,6 +217,13 @@
 		            
 		        });
 		        
+		        
+		        //每个分片 发送之前
+		        // 很重要, 配合最开始注册的 promise . 'before-send-file':'initUpload'
+		        uploader.on('uploadBeforeSend',function(block,data,headers){
+		        	data.uploadId = block.file.uploadId;
+		        	data.key = block.file.key;
+		        });
 		        
 		        // 每个文件上传成功
 		        uploader.on('uploadSuccess',function(file,response){
