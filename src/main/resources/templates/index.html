@@ -34,6 +34,8 @@
 		    // 当domReady的时候开始初始化
 		    $(function() {
 		    	
+		    	//生成时间戳
+		    	int timestamp = Math.round(new Date().getTime()/1000);
 		    	WebUploader.Uploader.register({'before-send-file':'initUpload'},{
 		    		initUpload:function(file) {
 		    			var deferred = $.ajax({
@@ -43,7 +45,7 @@
 		    				data: {
 		    					name: file.name,
 		    					type: file.type,
-		    					timestamp: Math.round(new Date().getTime()/1000)
+		    					timestamp: timestamp
 		    				}
 		    			}).then(function(res){
 		    				console.log(res);
