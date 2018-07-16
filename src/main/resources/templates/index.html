@@ -35,7 +35,7 @@
 		    $(function() {
 		    	
 		    	//生成时间戳
-		    	int timestamp = Math.round(new Date().getTime()/1000);
+		    	var timestamp = Math.round(new Date().getTime()/1000);
 		    	WebUploader.Uploader.register({'before-send-file':'initUpload'},{
 		    		initUpload:function(file) {
 		    			var deferred = $.ajax({
