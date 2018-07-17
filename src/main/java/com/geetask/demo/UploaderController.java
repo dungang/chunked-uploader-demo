@@ -23,6 +23,11 @@ public class UploaderController {
 	@Autowired
 	private AbstractStorage storage;
 	
+	
+	@GetMapping("/")
+	public String index() {
+		return "uploader";
+	}
 
 	@GetMapping("/uploader")
 	public String handle() {
