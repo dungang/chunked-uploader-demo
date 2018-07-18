@@ -11,6 +11,7 @@ public class Config {
 
 	@Bean
 	public AbstractStorage storage() {
-		return new FileStorage();
+		//return new FileStorage();
+		return new AliyunStorage();
 	}
 }
