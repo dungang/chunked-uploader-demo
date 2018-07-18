@@ -49,6 +49,8 @@ public class AliyunStorage extends AbstractStorage {
 	public String accessId = "输入accessId";
 	
 	public String accessKey = "输入accessKey";
+	
+	public String endpoint = "http://oss-cn-shenzhen.aliyuncs.com";
 
 
 	public AliyunStorage() {
@@ -56,7 +58,7 @@ public class AliyunStorage extends AbstractStorage {
 		conf.setMaxErrorRetry(10);
 		DefaultCredentials credentials = new DefaultCredentials(accessId, accessKey);
 		DefaultCredentialProvider provider = new DefaultCredentialProvider(credentials);
-		ossClient = new OSSClient("http://oss-cn-shenzhen.aliyuncs.com",provider, conf);
+		ossClient = new OSSClient(endpoint,provider, conf);
 	}
 
 	@PreDestroy

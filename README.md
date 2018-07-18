@@ -15,6 +15,7 @@ public class AliyunStorage extends AbstractStorage {
 	public String bucketName = "输入您的bucket";
 	public String accessId = "输入accessId";
 	public String accessKey = "输入accessKey";
+	public String endpoint = "http://oss-cn-shenzhen.aliyuncs.com";
 ```
 
 测试的时候，使用chrome 的调试工具 查看 network的部分 就可以看到结果
